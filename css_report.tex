@@ -1,0 +1,80 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{Computational Social Science Fall 2021}
+\author{Mehdi Raza, Murtaza Ali Khan, Synclair Samson, Zuhayr Munib}
+\date{December 2021}
+
+\begin{document}
+
+\maketitle
+
+\section*{Title}
+\textbf{Water Distribution Pattern (Karachi)
+Reliance on Tankers for Water Distribution in Karachi - District South}
+
+\section*{Storyline}
+In the city of Karachi, a major contributor to the industrial production in Pakistan as about 60\% of the total industries are all located within the city. With a total population of 14.91 million (2017) and 60\% of the industries in Karachi, the question arises of how water is distributed to meet the needs of the residential areas and those industries. As the total legal hydrants in Karachi is at 6, 1 per district, with District South having a population of 1.8 million people (2017). 
+The proximate purpose of this model is to predict the dynamics of the total number of water tankers operational to supply the water, the residential houses to which the water is distributed to and to the industries the water is given to. In being more specific and for the ultimate purpose of the model, we have opted to focus on the Sherpao Hydrant in the District South of Karachi to see how much many times tankers make their trip to residences in the District South but also as to how much water is also being given to the industries, taking into account the seasonal changes and different water rates set by the KWSB. Which is to see the tanker mafia-customers interactions on the basis of how this affects the water distribution in the city.
+Line water is not a regular and reliable source for both domestic and industrial users. People and businesses depend upon water delivery through tanker services. Especially when there are shortages or breakages in lines. A few years ago the government legalized certain water hydrants from where tankers can be filled, though the problem of illegal water hydrants still remains large. Illegal water pumps are essentially made by interrupting water lines and its job is to suck the water from the lines laid for each house. A majority of the houses in the District South have been laid down with illegal water pumps to receive a higher quantity of water. 
+For water to be supplied to a resident’s house, a call is made to the private tankers’ mafia requesting a specific tanker. This may vary from 3000-5000 gallon water tankers. The tanker mafia in this situation is the middleman, where KWSB is the one supplying the water to them. The specific tankers deliver the water to residents’ houses at rates set by KWSB and this may vary from season to season, the total amount of water supplied is also subjected to the availability of water in the city and demand by both residential households and industries.
+
+\section*{Purpose}
+To monitor patterns of water distribution through tankers in Karachi for both industrial and domestic users. 
+
+\section*{Agents/Entities}
+Tankers, Domestic users, Industrial users, Water Hydrant, Background(patches). Heterogenous (all).
+
+\section*{Environment}
+Cellular Based
+
+\section*{Global Variables}
+\begin{itemize}
+    \item no-of-domestic-users: Slider to control number of domestic users, from 0 - 100, in increments of 5, with default value 25. 
+    \item no-of-industrial users: Slider to control number of industrial users, from 0-10, in increments of 1, with default 4. 
+    \item no-of-tankers: Slider to control number of tankers, from 0-20, in increments of 1, with default 20. 
+    \item Chooser, govt policy, with options of normal or industry subsidized, the latter option increases the water usage of industrial users.
+\end{itemize}
+
+\section*{Sensing}
+Tankers can sense when both domestic users and industrial users have low water levels and reach them to refill them.
+
+\section*{Stochasticity/Randomness}
+We have modeled the change in seasons by change in ticks. From tick 0 - 16 it is summer and the temperature is 40 Celsius, from 16 - 32 it is Autumn and the temperature is 20 Celsius, from 32 - 48 it is winter and the temperature is 10 Celsius and from 48 - 64 it is spring and the temperature is 15 Celsius. 
+
+\section*{Interaction}
+Tankers interact with domestic users and industrial users, filling them with water. When Tankers are low on water themselves they fill up from the water pump. Domestic users’ water usage differs with change in seasons which can be observed with the change in the color of patches. 
+
+\section*{Setup and Initialization}
+At Setup, domestic users are created with reference to the number selected through the slider no-of-domestic-users, similarly industrial users are created with reference to the number selected through the slider no-of-industrial-users. Tankers are created with reference to the number on the slider no-of-tankers. Initially both domestic and industrial users have full water storage and require no tankers. At 0 ticks the season is summer and the patches are yellow. The position of domestic and industrial users is random and different for every setup. The water hydrant remains at the center of the model.
+
+\section*{Time}
+Each tick is meant to represent one week. 
+
+\section*{Process Overview}
+\begin{itemize}
+    \item Environment: \\
+Changes temperature as ticks continue as well as color to show change in season. (for e.g at 16 ticks it is fall with temperature = 20 Celsius and Color is Orange)
+    \item Tankers: \\
+Tankers execute truck-water-refill refill water when levels lower than 1000, maximum capacity is 5000 gallons. 
+    \item Domestic Users: \\
+Domestic users execute people-water-refill to refill water when water levels are low. They turn red till reached by tankers and refilled.
+    \item Industrial Users: \\
+Industrial users execute industry-water-refill to refill water when storage levels are low. They also turn red when storage levels are low and return to gray color when filled. 
+\end{itemize}  
+
+
+
+
+
+\section*{Output/Plots}
+\begin{enumerate}
+    \item Water Usage for Industrial\\
+Plots the usage of water by industries across time
+    \item Water Usage for Domestic  \\
+Plots the usage of water by domestic users across time
+    \item Water Supply  \\
+    Plots the total water supply across time
+\end{enumerate}
+
+\end{document}
